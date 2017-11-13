@@ -1,0 +1,6 @@
+{
+  "test_polygon.py": true,
+  "test_simple_polygon.py": true,
+  "test_simple_polygon.py::test_simple_polygon": true,
+  "tests/test_simple_polygon.py": true
+}
