@@ -33,4 +33,3 @@ def test_convex_polygon() -> None:
                                                 Point(-50, 10),
                                                 Point(-50, 50),
                                                 Point(-50, 210)]
-
