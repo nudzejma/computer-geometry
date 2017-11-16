@@ -4,10 +4,6 @@ Class Polygon
 from cmath import inf
 from typing import List, Tuple
 import turtle
-# from structures.point import
-# import distance as distance
-import math
-from scipy.spatial import distance
 
 from structures.line_segment import Segment
 from structures.point import Point
