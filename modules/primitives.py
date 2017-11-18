@@ -11,7 +11,9 @@ from structures.point import Point
 
 # helping methods
 from structures.polygon import Polygon
+from structures.quadrilateral import Quadrilateral
 from structures.stack import Stack
+from structures.triangle import Triangle
 
 
 def euclidean_distance(p1: Point, p2: Point) -> float:
@@ -147,17 +149,15 @@ def graham_scan(input_list: List[Point]) -> Polygon:
     input_list = stack_to_list(s)
     return Polygon(input_list)
 
-def point_in_triangle(pointA: Point, pointB: Point, pointC: Point, inspect_point: Point) -> bool:
+def point_in_triangle(triangle: Triangle, inspect_point: Point) -> bool:
     '''
-    :param pointA: first point of triangle
-    :param pointB: second point of triangle
-    :param pointC: third point of triangle
+    :param triangle: triangle
     :param inspect_point:
     :return: true if inspect_point is inside of triangle, false otherwise
     '''
-    ccw_ABD = ccw(pointA, pointB, inspect_point)
-    ccw_BCD = ccw(pointB, pointC, inspect_point)
-    ccw_CAD = ccw(pointC, pointA, inspect_point)
+    ccw_ABD = ccw(triangle.first, triangle.second, inspect_point)
+    ccw_BCD = ccw(triangle.second, triangle.third, inspect_point)
+    ccw_CAD = ccw(triangle.third, triangle.first, inspect_point)
 
     return (ccw_ABD >= 0 and ccw_BCD >= 0 and ccw_CAD >= 0) or (ccw_ABD <= 0 and ccw_BCD <= 0 and ccw_CAD <= 0)
 
@@ -191,8 +191,72 @@ def point_in_polygon(polygon: Polygon, inspect_point: Point) -> bool:
 
     return count % 2 == 1
 
+def polygon_orientation(polygon: Polygon) -> float:
+    sum = 0
+    for i in range(len(polygon.points)-1):
+        sum += (polygon.points[i+1].x-polygon.points[i].x)*(polygon.points[i+1].y+polygon.points[i].y)
+    print(sum)
+    if sum > 0: return 1
+    return -1
+
+def segment_polygon_intersection(polygon: Polygon, segment: Segment) -> bool:
+    '''
+    Determinates whether segment and polygon intersects
+    :param polygon:
+    :param segment:
+    :return: True if segment and polygon intersects, False otherwise
+    '''
+    for i in range(len(polygon.points)-1):
+        if segments_intersect(Segment(polygon.points[i], polygon.points[i+1]), segment):
+            return True
+
+    return False
+
+def is_triangle_empty(input_list: List[Point], triangle: Triangle) -> None:
+    '''
+    Deeterminate whether some points from input list are in triangle
+    :param input_list: list of point
+    :param triangle:
+    :return: True if triangle is empty, False otherwise
+    '''
+    sum_of_points_in_triangle = 0
+    for i in range(len(input_list)):
+        if(point_in_triangle(triangle, input_list[i])):
+            sum_of_points_in_triangle += 1
+
+    return sum_of_points_in_triangle == 0
+
+def is_polygon_empty(input_list: List[Point], polygon: Polygon) -> None:
+    '''
+    :param input_list: list of point
+    :param polygon: polygon
+    :return: True if polygon is empty, False otherwise
+    '''
+    sum_of_points_in_polygon = 0
+    for i in range(len(input_list)):
+        if(point_in_polygon(polygon, input_list[i])):
+            sum_of_points_in_polygon += 1
+
+    return sum_of_points_in_polygon == 0
+
+def is_polygon_convex(polygon: Polygon) -> bool:
+    '''
+    :param polygon: polygon
+    :return: True if polygon is convex, False otherwise
+    '''
+    old_ccw = ccw(polygon.points[0], polygon.points[1], polygon.points[2])
+    for i in range(1, len(polygon.points)-1):
+        new_ccw = ccw(polygon.points[i%len(polygon.points)], polygon.points[(i+1)%len(polygon.points)], polygon.points[(i+2)%len(polygon.points)])
+        if old_ccw != new_ccw:
+            return False
+
+    return True
+
+# q = Quadrilateral(Point(0,0), Point(50, 50), Point(100, 0), Point(50, 100))
+# q.draw()
+# print(is_polygon_convex(q))
 # s1 = Segment(Point(0,0), Point(100, 0))
-# s2 = Segment(Point(50, 0), Point(50, 10))
+# s2 = Segment(Point(150, 0), Point(170, 0))
 # print(segments_intersect(s1, s2))
 # triangle_points = [Point(0,0), Point(100, 0), Point(50, 100), Point(30, 0)]
 # pol = Polygon(triangle_points)
@@ -227,11 +291,15 @@ input_list = [Point(0, 0),
                     Point(-40, 50),
                     Point(10, 210)]
 
-p = Polygon(get_simple_polygon(input_list))
-print(point_in_polygon(p, Point(100, 150)))
-p.draw()
+# p = Polygon(get_simple_polygon(input_list))
+# t = Triangle(Point(-100, 0), Point(-60, 0), Point(-70, 150))
+# t.draw()
+# print(point_in_polygon(p, Point(100, 150)))
+# p.draw()
+# print(is_triangle_empty(input_list, t))
 # Polygon(get_simple_polygon(input_list)).draw()
 # q = graham_scan(input_list)
+# print(segment_polygon_intersection(p, s2))
 # q.draw()
 # p1 = Point(0, 0)
 # p2 = Point(100, 0)
