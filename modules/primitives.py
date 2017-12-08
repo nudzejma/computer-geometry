@@ -1,8 +1,9 @@
 '''
 This module contains some primitve methods in computer geometry
 '''
+import turtle
 from cmath import inf
-from random import random
+from random import random, randint
 from typing import List, Tuple
 import math
 
@@ -17,7 +18,14 @@ from structures.triangle import Triangle
 
 
 def euclidean_distance(p1: Point, p2: Point) -> float:
+    '''
+    Helper function.
+    :param p1: point
+    :param p2: point
+    :return: euclidean distance of two points
+    '''
     return math.sqrt((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2)
+
 
 def get_x_coordinate(point: Point) -> Tuple[float, float]:
     '''
@@ -26,6 +34,7 @@ def get_x_coordinate(point: Point) -> Tuple[float, float]:
     '''
     return (point.x, -point.y)
 
+
 def get_simple_polygon(input_list: List[Point]) -> List[Point]:
     '''
     Method get_simple_polygon implemented by algorithm for finding a simple polygon
@@ -33,6 +42,10 @@ def get_simple_polygon(input_list: List[Point]) -> List[Point]:
     :param input_list: input list of polygon points
     :return: list of Points for generating a simple polygon
     '''
+
+    if len(input_list) == 0:
+        return input_list
+
     left_point = sorted(input_list, key=get_x_coordinate)[0]
 
     def _get_tan(point: Point) -> Tuple[float, float]:
@@ -51,6 +64,7 @@ def get_simple_polygon(input_list: List[Point]) -> List[Point]:
 
     return sorted(input_list, key=_get_tan)
 
+
 def on_segment(p: Point, q: Point, r: Point) -> bool:
     '''
     Determinates whether point q in on segment pr
@@ -64,9 +78,10 @@ def on_segment(p: Point, q: Point, r: Point) -> bool:
         return True
     return False
 
+
 def ccw(p1: Point, p2: Point, p3: Point) -> float:
     '''
-    Computes orientation of 3 points
+    Determinates orientation of 3 points
     :param p1: point
     :param p2: point
     :param p3: point
@@ -78,14 +93,15 @@ def ccw(p1: Point, p2: Point, p3: Point) -> float:
     elif value > 0: return 1
     return -1
 
+
 def segments_intersect(s1: Segment, s2: Segment) -> bool:
     '''
-    determinates whether segments intersects
-    :param s1:
-    :param s2:
-    :return: true if segment intersects and false if they're not
+    Determinates whether segments intersect
+    :param s1: segment
+    :param s2: segment
+    :return: True if segments intersect, False otherwise
     '''
-    # if(s1 == s2): return True
+
     o1 = ccw(s1.first, s1.second, s2.first)
     o2 = ccw(s1.first, s1.second, s2.second)
     o3 = ccw(s2.first, s2.second, s1.first)
@@ -105,21 +121,23 @@ def segments_intersect(s1: Segment, s2: Segment) -> bool:
 def get_y_coordinate(point: Point) -> Tuple[float, float]:
     return (point.y, -point.x)
 
+
 def next_to_top(s):
     '''
+    Helper function
     :param s: stack
     :return: point next to top point
     '''
     first = s.peek()
     s.pop()
     second = s.peek()
-    # s.push(second)
     s.push(first)
     return second
 
 
 def stack_to_list(s) -> list:
     '''
+    Helper function
     :param s: stack
     :return: list with elements from stack
     '''
@@ -129,14 +147,14 @@ def stack_to_list(s) -> list:
         s.pop()
     return final_list
 
+
 def graham_scan(input_list: List[Point]) -> Polygon:
     '''
-    method for generation convex polygon
-    :param input_list:
+    Method for generation convex polygon
+    :param input_list: input_list
     :return: convex polygon
     '''
     input_list = get_simple_polygon(input_list)
-    # print(input_list)
     s = Stack()
     s.push(input_list[0])
     s.push(input_list[1])
@@ -149,11 +167,12 @@ def graham_scan(input_list: List[Point]) -> Polygon:
     input_list = stack_to_list(s)
     return Polygon(input_list)
 
+
 def point_in_triangle(triangle: Triangle, inspect_point: Point) -> bool:
     '''
     :param triangle: triangle
-    :param inspect_point:
-    :return: true if inspect_point is inside of triangle, false otherwise
+    :param inspect_point: point
+    :return: True if inspect_point is in triangle, False otherwise
     '''
     ccw_ABD = ccw(triangle.first, triangle.second, inspect_point)
     ccw_BCD = ccw(triangle.second, triangle.third, inspect_point)
@@ -161,19 +180,14 @@ def point_in_triangle(triangle: Triangle, inspect_point: Point) -> bool:
 
     return (ccw_ABD >= 0 and ccw_BCD >= 0 and ccw_CAD >= 0) or (ccw_ABD <= 0 and ccw_BCD <= 0 and ccw_CAD <= 0)
 
+
 def point_in_polygon(polygon: Polygon, inspect_point: Point) -> bool:
     '''
-    :param polygon:
-    :param inspect_point:
-    :return: True if inspect_point is inside of polygon, False otherwise
+    :param polygon: polygon
+    :param inspect_point: point
+    :return: True if inspect_point is in polygon, False otherwise
     '''
-    # old_ccw = ccw(polygon.points[0], polygon.points[1], inspect_point)
-    # for i in range(1,len(polygon.points)-1):
-    #     new_ccw = ccw(polygon.points[i], polygon.points[i+1], inspect_point)
-    #     print('i:', i, ' ', polygon.points[i])
-    #     if(new_ccw*old_ccw < 0):
-    #         return False
-    # return True
+
     extreme_point = Point(inf, inspect_point.y)
     count = 0
     i = 0
@@ -191,7 +205,13 @@ def point_in_polygon(polygon: Polygon, inspect_point: Point) -> bool:
 
     return count % 2 == 1
 
+
 def polygon_orientation(polygon: Polygon) -> float:
+    '''
+    Determinates polygon's orientation
+    :param polygon: polygon
+    :return: 1 if polygon's orientation is cw, -1 otherwise
+    '''
     sum = 0
     for i in range(len(polygon.points)-1):
         sum += (polygon.points[i+1].x-polygon.points[i].x)*(polygon.points[i+1].y+polygon.points[i].y)
@@ -199,23 +219,25 @@ def polygon_orientation(polygon: Polygon) -> float:
     if sum > 0: return 1
     return -1
 
+
 def segment_polygon_intersection(polygon: Polygon, segment: Segment) -> bool:
     '''
-    Determinates whether segment and polygon intersects
-    :param polygon:
-    :param segment:
-    :return: True if segment and polygon intersects, False otherwise
+    Determinates whether segment and polygon intersect
+    :param polygon: polygon
+    :param segment: segment
+    :return: True if segment and polygon intersect, False otherwise
     '''
-    for i in range(len(polygon.points)-1):
-        if segments_intersect(Segment(polygon.points[i], polygon.points[i+1]), segment):
+    for i in range(len(polygon.points)):
+        if segments_intersect(Segment(polygon.points[i%len(polygon.points)], polygon.points[(i+1)%len(polygon.points)]), segment):
             return True
 
     return False
 
+
 def is_triangle_empty(input_list: List[Point], triangle: Triangle) -> None:
     '''
-    Deeterminate whether some points from input list are in triangle
-    :param input_list: list of point
+    Determinates whether some points from input list are in triangle
+    :param input_list: list of points
     :param triangle:
     :return: True if triangle is empty, False otherwise
     '''
@@ -226,9 +248,10 @@ def is_triangle_empty(input_list: List[Point], triangle: Triangle) -> None:
 
     return sum_of_points_in_triangle == 0
 
+
 def is_polygon_empty(input_list: List[Point], polygon: Polygon) -> None:
     '''
-    :param input_list: list of point
+    :param input_list: list of points
     :param polygon: polygon
     :return: True if polygon is empty, False otherwise
     '''
@@ -238,6 +261,7 @@ def is_polygon_empty(input_list: List[Point], polygon: Polygon) -> None:
             sum_of_points_in_polygon += 1
 
     return sum_of_points_in_polygon == 0
+
 
 def is_polygon_convex(polygon: Polygon) -> bool:
     '''
@@ -252,60 +276,259 @@ def is_polygon_convex(polygon: Polygon) -> bool:
 
     return True
 
-# q = Quadrilateral(Point(0,0), Point(50, 50), Point(100, 0), Point(50, 100))
-# q.draw()
-# print(is_polygon_convex(q))
-# s1 = Segment(Point(0,0), Point(100, 0))
-# s2 = Segment(Point(150, 0), Point(170, 0))
-# print(segments_intersect(s1, s2))
-# triangle_points = [Point(0,0), Point(100, 0), Point(50, 100), Point(30, 0)]
-# pol = Polygon(triangle_points)
-# pol.draw()
-# print(ccw(Point(0, 0), Point(50, 0), Point(100, 0)), ' ' , ccw(Point(0, 0), Point(-50, 0), Point(100, 0)))
 
-input_points = [Point(0,0),
-                Point(200, 100),
-                Point(0, 100),
-                Point(200, 0),
-                Point(50, 30),
-                # Point(100, 110),
-                Point(150, 300),
-                Point(100, 0),
-                Point(30, 50),
-                Point(-50, 50),
-                Point(10,210)]
 
-input_list = [Point(0, 0),
-                    Point(200, 100),
-                    Point(0, 100),
-                    Point(200, 0),
-                    Point(200, 200),
-                    Point(50, 30),
-                    Point(100, 110),
-                    Point(150, 190),
-                    Point(-50, 10),
-                    Point(100, 0),
-                    Point(30, 50),
-                    Point(-50, 210),
-                    Point(-50, 50),
-                    Point(-40, 50),
-                    Point(10, 210)]
 
+
+#Test for algorithm "get_simple_polygon"
+# input_list = []
+# n = 50
+# input_x_list = [randint(-200,200) for _ in range(0,n)]
+# input_y_list = [randint(-200, 200) for _ in range(0,n)]
+# for i in range(n):
+#     input_list.append(Point(input_x_list[i], input_y_list[i]))
 # p = Polygon(get_simple_polygon(input_list))
-# t = Triangle(Point(-100, 0), Point(-60, 0), Point(-70, 150))
-# t.draw()
-# print(point_in_polygon(p, Point(100, 150)))
-# p.draw()
-# print(is_triangle_empty(input_list, t))
-# Polygon(get_simple_polygon(input_list)).draw()
-# q = graham_scan(input_list)
-# print(segment_polygon_intersection(p, s2))
-# q.draw()
-# p1 = Point(0, 0)
-# p2 = Point(100, 0)
-# p3 = Point(50, -30)
-# p = Polygon([p1, p2, p3])
-# print(ccw(p1, p2, p3))
-# p.draw()
+# p.draw(turtle, "blue")
 
-# print(on_segment(Point(0,0), Point(0,0), Point(0, 100)))
+
+#Test for alghoritm "convex_polygon"
+# input_list = []
+# n = 50
+# input_x_list = [randint(-200,200) for _ in range(0,n)]
+# input_y_list = [randint(-200, 200) for _ in range(0,n)]
+# for i in range(n):
+#     input_list.append(Point(input_x_list[i], input_y_list[i]))
+# q = graham_scan(input_list)
+# q.draw(turtle, "red")
+
+
+#Test for algorithm "point_in_triangle"
+# point_first = Point(randint(-200, 200),randint(-200,200))
+# point_second = Point(randint(-200, 200),randint(-200,200))
+# point_third = Point(randint(-200, 200),randint(-200,200))
+# inspect_point = Point(randint(-200, 200),randint(-200,200))
+#
+# t = Triangle(point_first, point_second, point_third)
+# t.draw(turtle, "green")
+# turtle.up()
+# inspect_point.draw(turtle, "yellow")
+# turtle.up()
+# turtle.setpos(-100,-250)
+# turtle.color("red")
+# if(point_in_triangle(t, inspect_point)):
+#     turtle.write("Point is in triangle", font=("Arial", 16, "bold"))
+# else:
+#          turtle.write("Point is not in triangle", font=("Arial", 16, "italic"))
+
+
+#Test for algorithm "point_in_polygon"
+# point = Point(randint(-200, 200),randint(-200,200))
+# input_list = []
+# n = 20
+# input_x_list = [randint(-200,200) for _ in range(0,n)]
+# input_y_list = [randint(-200, 200) for _ in range(0,n)]
+# for i in range(n):
+#     input_list.append(Point(input_x_list[i], input_y_list[i]))
+#
+# p = Polygon(get_simple_polygon(input_list))
+# p.draw(turtle, "blue")
+# point.draw(turtle, "green")
+# turtle.up()
+# turtle.setpos(-100,-250)
+# turtle.color("red")
+# if point_in_polygon(p, point):
+#      turtle.write("Point is in polygon", font=("Arial", 16, "bold"))
+# else:
+#      turtle.write("Point is not in polygon", font=("Arial", 16, "italic"))
+
+
+#Test for algorithm "segments_intersects"
+# point_x_first = Point(randint(-200, 200),randint(-200,200))
+# point_y_first = Point(randint(-200, 200),randint(-200,200))
+# point_x_second = Point(randint(-200, 200),randint(-200,200))
+# point_y_second = Point(randint(-200, 200),randint(-200,200))
+#
+# s1 = Segment(point_x_first, point_y_first)
+# s1.draw(turtle, "green")
+# turtle.up()
+# s2 = Segment(point_x_second, point_y_second)
+# s2.draw(turtle, "yellow")
+# turtle.up()
+# turtle.setpos(-100,-250)
+# turtle.color("red")
+# if( segments_intersect(s1, s2)):
+#     turtle.write("Segments do intersect", font=("Arial", 16, "bold"))
+# else:
+#    turtle.write("Segments do not intersect", font=("Arial", 16, "italic"))
+
+
+#Test for algorithm "ccw"
+# point_first = Point(randint(-200, 200),randint(-200,200))
+# point_second = Point(randint(-200, 200),randint(-200,200))
+# point_third = Point(randint(-200, 200),randint(-200,200))
+# turtle.up()
+# point_first.draw(turtle, "green")
+# turtle.up()
+# point_second.draw(turtle, "yellow")
+# turtle.up()
+# point_third.draw(turtle, "blue")
+# turtle.up()
+# turtle.setpos(-100,-250)
+# turtle.color("red")
+#
+# if(ccw(point_first, point_second, point_third)) > 0:
+#     turtle.write("CCW", font=("Arial", 16, "bold"))
+# elif(ccw(point_first, point_second, point_third)) <0:
+#     turtle.write("NOT CCW", font=("Arial", 16, "bold"))
+# else:
+#     turtle.write("Points are colinear", font=("Arial", 16, "bold"))
+
+
+#Test for algorithm "polygon_orientation"
+# input_list = []
+# n = 10
+# input_x_list = [randint(-200,200) for _ in range(0,n)]
+# input_y_list = [randint(-200, 200) for _ in range(0,n)]
+# for i in range(n):
+#     input_list.append(Point(input_x_list[i], input_y_list[i]))
+# p = graham_scan(input_list)
+# p.draw(turtle, "blue")
+#
+# turtle.up()
+# turtle.setpos(-100,-250)
+# turtle.color("red")
+#
+# if(polygon_orientation(p)) < 0:
+#     turtle.write("Orientation: CCW", font=("Arial", 16, "bold"))
+# else:
+#     turtle.write("Orientation: CW", font=("Arial", 16, "bold"))
+
+
+#Test for algorithm "segment_polygon_intersection"
+# input_list = []
+# n = 10
+# input_x_list = [randint(-200,200) for _ in range(0,n)]
+# input_y_list = [randint(-200, 200) for _ in range(0,n)]
+# for i in range(n):
+#     input_list.append(Point(input_x_list[i], input_y_list[i]))
+# p = Polygon(get_simple_polygon(input_list))
+# p.draw(turtle, "blue")
+#
+# point_x_first = Point(randint(-200, 200),randint(-200,200))
+# point_y_first = Point(randint(-200, 200),randint(-200,200))
+#
+# turtle.up()
+# s1 = Segment(point_x_first, point_y_first)
+# s1.draw(turtle, "green")
+#
+# turtle.up()
+# turtle.setpos(-100,-250)
+# turtle.color("red")
+#
+# if(segment_polygon_intersection(p,s1)):
+#     turtle.write("Polygon and segment do intersect", font=("Arial", 16, "bold"))
+# else:
+#     turtle.write("Polygon and segment do not intersect", font=("Arial", 16, "bold"))
+
+
+#Test for algorithm "is_empty_triangle"
+# input_list = []
+# n = 18
+# input_x_list = [randint(-200,200) for _ in range(0,n)]
+# input_y_list = [randint(-200, 200) for _ in range(0,n)]
+# for i in range(n):
+#     input_list.append(Point(input_x_list[i], input_y_list[i]))
+#
+# point_first = Point(randint(-200, 200),randint(-200,200))
+# point_second = Point(randint(-200, 200),randint(-200,200))
+# point_third = Point(randint(-200, 200),randint(-200,200))
+#
+#
+# t = Triangle(point_first, point_second, point_third)
+# t.draw(turtle, "green")
+# turtle.up()
+# for i in range(n):
+#     input_list[i].draw(turtle, "blue")
+#     turtle.up()
+#
+# turtle.up()
+# turtle.setpos(-100,-250)
+# turtle.color("red")
+
+# if(is_triangle_empty(input_list,t)):
+#     turtle.write("Triangle is empty", font=("Arial", 16, "bold"))
+# else:
+#     turtle.write("Triangle is not empty", font=("Arial", 16, "bold"))for i in range(n):
+#     input_list[i].draw(turtle, "blue")
+#     turtle.up()
+
+
+#Test for algorithm "is_polygon_empty"
+# input_list = []
+# n = 18
+# input_x_list = [randint(-200,200) for _ in range(0,n)]
+# input_y_list = [randint(-200, 200) for _ in range(0,n)]
+# for i in range(n):
+#     input_list.append(Point(input_x_list[i], input_y_list[i]))
+# p = Polygon(get_simple_polygon(input_list))
+# p.draw(turtle, "blue")
+# turtle.up()
+#
+# input_list_points = []
+# n = 18
+# input_x_list_points = [randint(-200,200) for _ in range(0,n)]
+# input_y_list_points = [randint(-200, 200) for _ in range(0,n)]
+# for i in range(n):
+#     input_list_points.append(Point(input_x_list_points[i], input_y_list_points[i]))
+#
+# for i in range(n):
+#     input_list_points[i].draw(turtle, "green")
+#     turtle.up()
+#
+# turtle.setpos(-100,-250)
+# turtle.color("red")
+#
+# if(is_polygon_empty(input_list_points, p)):
+#     turtle.write("Polygon is empty", font=("Arial", 16, "bold"))
+# else:
+#     turtle.write("Polygon is not empty", font=("Arial", 16, "bold"))
+
+
+#Test for algorithm "convex_polygon"
+# point_first = Point(randint(-200, 200),randint(-200,200))
+# point_second = Point(randint(-200, 200),randint(-200,200))
+# point_third = Point(randint(-200, 200),randint(-200,200))
+# point_fourth = Point(randint(-200, 200),randint(-200,200))
+#
+# q = Quadrilateral(point_first, point_second, point_third, point_fourth)
+# q.draw(turtle, "green")
+#
+# turtle.up()
+# turtle.setpos(-100,-250)
+# turtle.color("red")
+# if(is_polygon_convex(q)):
+#     turtle.write("Polygon is convex", font=("Arial", 16, "bold"))
+# else:
+#     turtle.write("Polygon is not convex", font=("Arial", 16, "bold"))
+
+turtle.done()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

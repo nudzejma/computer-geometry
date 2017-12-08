@@ -1,4 +1,6 @@
 import sys, os
+
+
 myPath = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, myPath + '/../')
 
@@ -20,3 +22,8 @@ def test_simple_polygon() -> None:
                                                 Point(200, 0),
                                                 Point(200, 100),
                                                 Point(100, 100)]
+
+
+
+
+

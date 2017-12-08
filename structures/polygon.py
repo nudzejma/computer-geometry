@@ -25,3 +25,16 @@ class Polygon:
         #     s = Segment(self.points[i-1], self.points[i])
         #     s.draw()
         turtle.done()
+    def draw(self, t, color):
+        i = 0
+        length = self.points.__len__()
+        # t.color(color)
+        while(i < length):
+            s = Segment(self.points[i], self.points[(i+1)%length])
+            s.draw(t,color)
+            i += 1
+        # other way:
+        # for i, _ in enumerate(self.points):
+        #     s = Segment(self.points[i-1], self.points[i])
+        #     s.draw()
+        # t.done()

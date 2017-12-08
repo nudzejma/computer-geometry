@@ -13,3 +13,5 @@ def benchmark(method: callable, arg: any):
   sm = time()
   # print('{}s'.format(sm-fm))
   return sm-fm
+
+
