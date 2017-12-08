@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="79056b5c-1091-4d78-8ce5-3acd8bdca987" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.cache/v/cache/lastfailed" afterPath="$PROJECT_DIR$/.cache/v/cache/lastfailed" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/kompjuterska_geometrija.iml" afterPath="$PROJECT_DIR$/.idea/kompjuterska_geometrija.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui.py" afterPath="$PROJECT_DIR$/gui.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/primitives.py" afterPath="$PROJECT_DIR$/modules/primitives.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sorting_algorithms/benchmark.py" afterPath="$PROJECT_DIR$/sorting_algorithms/benchmark.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/structures/line_segment.py" afterPath="$PROJECT_DIR$/structures/line_segment.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/structures/point.py" afterPath="$PROJECT_DIR$/structures/point.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/structures/polygon.py" afterPath="$PROJECT_DIR$/structures/polygon.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_quick_sort.py" afterPath="$PROJECT_DIR$/tests/test_quick_sort.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_segment_polygon_intersection.py" afterPath="$PROJECT_DIR$/tests/test_segment_polygon_intersection.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_simple_polygon.py" afterPath="$PROJECT_DIR$/tests/test_simple_polygon.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -97,6 +85,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <push-targets>
+      <push-target-info target-remote="origin" target-branch="amina1" repo="$PROJECT_DIR$" source="master" />
+    </push-targets>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -345,7 +336,14 @@
       <option name="project" value="LOCAL" />
       <updated>1512752111135</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="necessary commit">
+      <created>1512752341569</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1512752341569</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -378,7 +376,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fix" />
     <MESSAGE value="tests updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="tests updated" />
+    <MESSAGE value="necessary commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="necessary commit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
