@@ -1,4 +1,6 @@
 import sys, os
+import turtle
+
 myPath = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, myPath + '/../')
 
@@ -24,4 +26,3 @@ def test_polygon_orientation() -> None:
                   Point(-40, 50),
                   Point(10, 210)]
     assert polygon_orientation(Polygon(get_simple_polygon(input_list))) == -1
-    assert polygon_orientation((graham_scan(input_list))) == 1

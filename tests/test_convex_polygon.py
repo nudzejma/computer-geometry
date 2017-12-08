@@ -24,12 +24,13 @@ def test_convex_polygon() -> None:
                     Point(-50, 50),
                     Point(-40, 50),
                     Point(10, 210)]
-    assert graham_scan(input_list).points == [Point(10, 210),
-                                                Point(200, 200),
-                                                Point(200, 100),
-                                                Point(200, 0),
-                                                Point(100, 0),
-                                                Point(0, 0),
+    g = graham_scan(input_list)
+    print(g.points)
+    # g.draw()
+    assert graham_scan(input_list).points == [Point(-50, 210),
                                                 Point(-50, 10),
-                                                Point(-50, 50),
-                                                Point(-50, 210)]
+                                                Point(0, 0),
+                                                Point(200, 0),
+                                                Point(200, 200),
+                                                Point(10, 210)]
+

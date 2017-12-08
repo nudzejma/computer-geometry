@@ -155,17 +155,12 @@ def graham_scan(input_list: List[Point]) -> Polygon:
     :return: convex polygon
     '''
     input_list = get_simple_polygon(input_list)
-    s = Stack()
-    s.push(input_list[0])
-    s.push(input_list[1])
-    for i in range(2, len(input_list)):
-        to_top = next_to_top(s)
-        while ccw(to_top, s.peek(), input_list[i]) < 0:
-            s.pop()
-            to_top = next_to_top(s)
-        s.push(input_list[i])
-    input_list = stack_to_list(s)
-    return Polygon(input_list)
+    convex_hull = []
+    for p in input_list:
+        while len(convex_hull) > 1 and ccw(convex_hull[-2], convex_hull[-1], p) <= 0:
+            convex_hull.pop()
+        convex_hull.append(p)
+    return Polygon(convex_hull)
 
 
 def point_in_triangle(triangle: Triangle, inspect_point: Point) -> bool:
@@ -293,7 +288,7 @@ def is_polygon_convex(polygon: Polygon) -> bool:
 
 #Test for alghoritm "convex_polygon"
 # input_list = []
-# n = 50
+# n = 100000
 # input_x_list = [randint(-200,200) for _ in range(0,n)]
 # input_y_list = [randint(-200, 200) for _ in range(0,n)]
 # for i in range(n):
