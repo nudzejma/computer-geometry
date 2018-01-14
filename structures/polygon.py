@@ -2,6 +2,7 @@
 Class Polygon
 '''
 from cmath import inf
+from random import randint
 from typing import List, Tuple
 import turtle
 
@@ -12,7 +13,7 @@ from structures.point import Point
 class Polygon:
     def __init__(self, points: List[Point]):
         self.points = points
-
+        self.degrees = [2] * len(self.points)
     def draw(self):
         i = 0
         length = self.points.__len__()
@@ -38,3 +39,9 @@ class Polygon:
         #     s = Segment(self.points[i-1], self.points[i])
         #     s.draw()
         # t.done()
+
+# n = 18
+# input_x_list = [randint(-200,200) for _ in range(0,n)]
+# p = Polygon(input_x_list)
+# p.degrees[3] = 3
+# print(p.degrees)

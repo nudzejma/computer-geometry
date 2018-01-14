@@ -7,6 +7,7 @@ from random import random, randint
 from typing import List, Tuple
 import math
 
+from modules.hurtado_noy_algorithm import triangulate
 from structures.line_segment import Segment
 from structures.point import Point
 
@@ -288,12 +289,14 @@ def is_polygon_convex(polygon: Polygon) -> bool:
 
 #Test for alghoritm "convex_polygon"
 # input_list = []
-# n = 100000
+# n = 10
 # input_x_list = [randint(-200,200) for _ in range(0,n)]
 # input_y_list = [randint(-200, 200) for _ in range(0,n)]
 # for i in range(n):
 #     input_list.append(Point(input_x_list[i], input_y_list[i]))
 # q = graham_scan(input_list)
+# input_list = [Point(0, 0), Point(100, 0), Point(200, 100),  Point(100, 200), Point(0, 200), Point(-100, 100)]
+# q = Polygon(input_list)
 # q.draw(turtle, "red")
 
 
