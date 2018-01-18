@@ -1,1 +1,4 @@
-{}
+{
+  "tests/test_quick_sort.py": true,
+  "tests/test_simple_polygon.py::test_simple_polygon": true
+}
