@@ -13,7 +13,6 @@ from structures.point import Point
 class Polygon:
     def __init__(self, points: List[Point]):
         self.points = points
-        self.degrees = [2] * len(self.points)
     def draw(self):
         i = 0
         length = self.points.__len__()
