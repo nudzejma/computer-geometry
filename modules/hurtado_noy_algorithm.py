@@ -6,7 +6,8 @@ from typing import List, Tuple
 
 from anytree import Node, RenderTree, PreOrderIter
 from anytree.exporter import DotExporter
-from modules.primitives import graham_scan, is_polygon_convex
+
+from modules.primitives import graham_scan
 from sorting_algorithms.benchmark import benchmark
 from structures.line_segment import Segment
 from structures.point import Point
@@ -327,3 +328,4 @@ q = Polygon(input_list)
 # q.draw(turtle, "red")
 # turtle.done()
 print(triangulate(q))
+# print('sfsf')

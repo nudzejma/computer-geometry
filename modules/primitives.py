@@ -6,8 +6,6 @@ from cmath import inf
 from random import random, randint
 from typing import List, Tuple
 import math
-
-from modules.hurtado_noy_algorithm import triangulate
 from structures.line_segment import Segment
 from structures.point import Point
 
@@ -148,6 +146,27 @@ def stack_to_list(s) -> list:
         s.pop()
     return final_list
 
+def sort_list(input_list: List[Point]) -> List[Point]:
+    '''
+    Args:
+        input_list: list of points
+
+    Returns: sorted list of points
+
+    '''
+    def _get_tan(point: Point) -> float:
+        '''
+        :param point: upon which calcutes tangens
+        :return: order of sorting
+        '''
+        left_point = input_list[0]
+        if point.x == left_point.x:
+            return -inf
+        return (left_point.y - point.y) / (left_point.x - point.x)
+
+    input_list.sort()
+    input_list = input_list[:1] + sorted(input_list[1:], key=_get_tan)
+    return input_list
 
 def graham_scan(input_list: List[Point]) -> Polygon:
     '''
@@ -155,8 +174,10 @@ def graham_scan(input_list: List[Point]) -> Polygon:
     :param input_list: input_list
     :return: convex polygon
     '''
-    input_list = get_simple_polygon(input_list)
+
+    # input_list = get_simple_polygon(input_list)
     convex_hull = []
+    input_list = sort_list(input_list)
     for p in input_list:
         while len(convex_hull) > 1 and ccw(convex_hull[-2], convex_hull[-1], p) <= 0:
             convex_hull.pop()
@@ -289,14 +310,12 @@ def is_polygon_convex(polygon: Polygon) -> bool:
 
 #Test for alghoritm "convex_polygon"
 # input_list = []
-# n = 10
+# n = 100000
 # input_x_list = [randint(-200,200) for _ in range(0,n)]
 # input_y_list = [randint(-200, 200) for _ in range(0,n)]
 # for i in range(n):
 #     input_list.append(Point(input_x_list[i], input_y_list[i]))
 # q = graham_scan(input_list)
-# input_list = [Point(0, 0), Point(100, 0), Point(200, 100),  Point(100, 200), Point(0, 200), Point(-100, 100)]
-# q = Polygon(input_list)
 # q.draw(turtle, "red")
 
 
@@ -509,7 +528,7 @@ def is_polygon_convex(polygon: Polygon) -> bool:
 # else:
 #     turtle.write("Polygon is not convex", font=("Arial", 16, "bold"))
 
-turtle.done()
+# turtle.done()
 
 
 
