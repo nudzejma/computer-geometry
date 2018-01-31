@@ -149,7 +149,7 @@ input_list = [
     Point(x=-110, y=-50),
     Point(x=0, y=-100),
     Point(x=80, y=-100),
-    Point(x=140, y=-10),
+    # Point(x=140, y=-10),
     # Point(x=160, y=40),
     # Point(x=170, y=70),
     # Point(x=160, y=100),

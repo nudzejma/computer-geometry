@@ -71,9 +71,9 @@ def triangulate_recursive(root_triangulation: Node, triangulation: Triangulation
             # triangulation.diagonals = sorted(triangulation.diagonals, key=sort)
 
             root_string = 'root' + str(diagonal[0]) + '_' + str(current_n)
-            new_root_triangulation = Node(root_string,parent=root_triangulation, triangulation=triangulation.diagonals)
+            new_root_triangulation = Node(root_string,parent=root_triangulation, triangulation=new_triangulation.diagonals)
 
-            if ([current_n, current_n+1] == [end_n - 1, end_n]):
+            if (current_n == end_n - 1):
 
                continue
 
@@ -87,7 +87,7 @@ def triangulate(convex_polygon: Polygon) -> int:
     Args:
         convex_polygon: input polygon
 
-    Returns: number od triangulations
+    Returns: number of triangulations
 
     '''
     diagonal_list = []
@@ -98,7 +98,7 @@ def triangulate(convex_polygon: Polygon) -> int:
     current_n = 3
     root_triangulation = Node('root', triangulation=diagonal_list)
     fm = time()
-    node = triangulate_recursive(root_triangulation, t, current_n, len(convex_polygon.points))
+    triangulate_recursive(root_triangulation, t, current_n, len(convex_polygon.points))
     sm = time()
     print('{}s'.format(sm - fm))
     print(RenderTree(root_triangulation))
@@ -153,7 +153,7 @@ input_list = [
     Point(x=-130, y=-20),
     Point(x=-110, y=-50),
     Point(x=0, y=-100),
-    Point(x=80, y=-100),
+    # Point(x=80, y=-100),
     # Point(x=140, y=-10),
     # Point(x=160, y=40),
     # Point(x=170, y=70),
