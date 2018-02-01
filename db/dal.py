@@ -6,7 +6,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from db.models import Polygon
-from modules.hurtado_noy_optimized import triangulate
+from modules.hurtado_noy_algorithm import triangulate
 from structures.point import Point as Point
 
 from structures.polygon import Polygon as STPolygon
