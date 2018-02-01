@@ -86,6 +86,7 @@ class Polygon(Base):
     __tablename__ = 'polygon'
 
     id = Column(Integer, primary_key=True)
+    number_of_points = Column(Integer)
 
     points = relationship("Point", secondary=polygon_point,
                           back_populates="polygons")

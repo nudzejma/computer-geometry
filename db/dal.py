@@ -61,8 +61,8 @@ input_list = [
     # Point(x=-160, y=100)
 ]
 
-save_point(session, Point(0,0))
+# save_point(session, Point(0,0))
 
-# q = STPolygon(input_list)
-# s = save_triangulations(session, q, triangulate(q))
+q = STPolygon(input_list)
+s = save_triangulations(session, q, triangulate(q))
 # print(s.points)

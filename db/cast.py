@@ -79,6 +79,7 @@ def cast_polygon(polygon: Polygon) -> DBPolygon:
 
     """
     db_polygon = DBPolygon()
+    db_polygon.number_of_points = len(polygon.points)
 
     for point in polygon.points:
         db_polygon.points.append(cast_point(point))

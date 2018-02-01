@@ -60,7 +60,7 @@ def triangulate_recursive(root_triangulation, current_n: int, end_n: int) -> Non
             list_of_transform_pairs.append(i)
 
             new_child = Node('Child_' + str(pair[0]) + '_' + str(pair[1]), parent=root_triangulation, triangulation=list_of_child)
-            if ([current_n, current_n+1] == [end_n - 1, end_n]):
+            if current_n == end_n - 1:
 
                continue
 
@@ -140,7 +140,7 @@ input_list = [
     Point(x=-110, y=-50),
     Point(x=0, y=-100),
     Point(x=80, y=-100),
-    # Point(x=140, y=-10),
+    Point(x=140, y=-10),
     # Point(x=160, y=40),
     # Point(x=170, y=70),
     # Point(x=160, y=100),
@@ -157,3 +157,4 @@ input_list = [
 # turtle.done()
 q = Polygon(input_list)
 q_triangulations = triangulate(q)
+print(len(q_triangulations))
