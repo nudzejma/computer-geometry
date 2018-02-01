@@ -7,12 +7,10 @@ from typing import List
 
 from structures.line_segment import Segment
 from structures.point import Point
-from structures.triangle import Triangle
 from structures.polygon import Polygon
 
 from db.models import Point as DBPoint
 from db.models import Segment as DBSegment
-from db.models import Triangle as DBTriangle
 from db.models import Triangulation as DBTriangulation
 from db.models import Polygon as DBPolygon
 
@@ -50,24 +48,6 @@ def cast_segment(segment: Segment) -> DBSegment:
     return db_segment
 
 
-def cast_triangle(triangle: Triangle) -> DBTriangle:
-    """
-    Makes models.Triangle from structures.Triangle. Uses cast_point for
-    triangle point casting.
-
-    Args:
-        triangle: structures.Triangle object
-
-    Returns: models.Triangle object
-    """
-    db_triangle = DBTriangle()
-
-    db_triangle.points.append(cast_point(triangle.first))
-    db_triangle.points.append(cast_point(triangle.second))
-    db_triangle.points.append(cast_point(triangle.third))
-
-    return db_triangle
-
 def cast_triangulation(triangulation: List) -> DBTriangulation:
     """
     Makes models.Triangulation from list of structures.Triangle. Uses
@@ -85,23 +65,6 @@ def cast_triangulation(triangulation: List) -> DBTriangulation:
         db_triangulation.segments.append(cast_segment(segment))
 
     return db_triangulation
-
-# def cast_triangulation(triangulation: List[Triangle]) -> DBTriangulation:
-#     """
-#     Makes models.Triangulation from list of structures.Triangle. Uses
-#     cast_triangle for triangle casting. For loop wrapper function.
-#
-#     Args:
-#         triangulation: List of structures.Triangle objects
-#
-#     Returns: models.Triangulation object
-#     """
-#     db_triangulation = DBTriangulation()
-#
-#     for triangle in triangulation:
-#         db_triangulation.triangles.append(cast_triangle(triangle))
-#
-#     return db_triangulation
 
 
 def cast_polygon(polygon: Polygon) -> DBPolygon:

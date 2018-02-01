@@ -85,30 +85,28 @@ def triangulate(convex_polygon: Polygon):
 
     polygons_segments = []
     for node_ in LevelOrderIter(root_triangulation, filter_=lambda n: n.triangulation[len(n.triangulation)-1][1] == len(convex_polygon.points)-1):
+        list_of_segments = []
+        for pair in node_.triangulation:
+            s = Segment(convex_polygon.points[pair[0] - 1], convex_polygon.points[pair[1] - 1])
+            list_of_segments.append(s)
 
-        polygons_segments.append(node_.triangulation)
+        polygons_segments.append(list_of_segments)
 
     return polygons_segments
     # return len(polygons_segments)
 
-def draw_triangulation(index_of_triangulation: int, polygon_segments: List, convex_polygon: Polygon) -> None:
+def draw_triangulation(index_of_triangulation: int, polygon_segments: List) -> None:
     '''
     This function draws one triangulation of convex polygon
     Args:
         index_of_triangulation: which triangulation do we want to draw
-        polygon_segments: list of all trianngulations
-        convex_polygon: polygon
+        polygon_segments: list of trianngulations segments
 
     Returns: None
 
     '''
-    list_of_segments = []
-    for pair in polygon_segments[index_of_triangulation]:
 
-        s = Segment(convex_polygon.points[pair[0] - 1], convex_polygon.points[pair[1] - 1])
-        list_of_segments.append(s)
-
-    for segments in list_of_segments:
+    for segments in polygon_segments[index_of_triangulation]:
 
         segments.draw(turtle, "red")
 
@@ -158,4 +156,4 @@ input_list = [
 # q.draw(turtle, "red")
 # turtle.done()
 q = Polygon(input_list)
-print(triangulate(q))
+q_triangulations = triangulate(q)

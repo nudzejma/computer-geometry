@@ -10,10 +10,6 @@ from db.db_config import DB_URI
 
 Base = declarative_base()
 
-triangle_point = Table('triangle_point', Base.metadata,
-                       Column('triangle', Integer, ForeignKey('triangle.id')),
-                       Column('point', Integer, ForeignKey('point.id')))
-
 segment_point = Table('segment_point', Base.metadata,
                        Column('segment', Integer, ForeignKey('segment.id')),
                        Column('point', Integer, ForeignKey('point.id')))
@@ -30,12 +26,6 @@ polygon_triangulation = Table('polygon_triangulation', Base.metadata,
                                      'triangulation.id')))
 
 
-triangulation_triangle = Table('triangulation_triangle', Base.metadata,
-                               Column('triangle', Integer, ForeignKey(
-                                      'triangle.id')),
-                               Column('triangulation', Integer, ForeignKey(
-                                      'triangulation.id')))
-
 triangulation_segment = Table('triangulation_segment', Base.metadata,
                                Column('segment', Integer, ForeignKey(
                                       'segment.id')),
@@ -48,11 +38,12 @@ class Point(Base):
     __tablename__ = 'point'
 
     id = Column(Integer, primary_key=True)
-    x = Column(Float)
-    y = Column(Float)
+    x = Column(Integer)
+    y = Column(Integer)
 
-    triangles = relationship("Triangle", secondary=triangle_point,
+    segments = relationship("Segment", secondary=segment_point,
                              back_populates="points")
+
     polygons = relationship("Polygon", secondary=polygon_point,
                             back_populates="points")
 
@@ -73,19 +64,6 @@ class Segment(Base):
                                   secondary=triangulation_segment,
                                   back_populates="segments")
 
-class Triangle(Base):
-    """Model for triangle table. Represents 2D traingle."""
-    __tablename__ = 'triangle'
-
-    id = Column(Integer, primary_key=True)
-
-    points = relationship("Point", secondary=triangle_point,
-                          back_populates="triangles")
-
-    triangulations = relationship("Triangulation",
-                                  secondary=triangulation_triangle,
-                                  back_populates="triangles")
-
 
 class Triangulation(Base):
     """
@@ -98,9 +76,6 @@ class Triangulation(Base):
 
     polygons = relationship("Polygon", secondary=polygon_triangulation,
                             back_populates="triangulations")
-
-    triangles = relationship("Triangle", secondary=triangulation_triangle,
-                             back_populates="triangulations")
 
     segments = relationship("Segment", secondary=triangulation_segment,
                              back_populates="triangulations")
