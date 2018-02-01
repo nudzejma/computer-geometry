@@ -66,7 +66,7 @@ def triangulate_recursive(root_triangulation, current_n: int, end_n: int) -> Non
 
             triangulate_recursive(new_child, current_n+1, end_n)
 
-def triangulate(convex_polygon: Polygon) -> int:
+def triangulate(convex_polygon: Polygon):
     '''
 
     This function finds triangulations of convex polygon
@@ -88,7 +88,8 @@ def triangulate(convex_polygon: Polygon) -> int:
 
         polygons_segments.append(node_.triangulation)
 
-    return len(polygons_segments)
+    return polygons_segments
+    # return len(polygons_segments)
 
 def draw_triangulation(index_of_triangulation: int, polygon_segments: List, convex_polygon: Polygon) -> None:
     '''
@@ -154,7 +155,7 @@ input_list = [
     # Point(x=-160, y=100)
 ]
 # hurtado_noy_benchmark(input_list)
-q = Polygon(input_list)
 # q.draw(turtle, "red")
 # turtle.done()
+q = Polygon(input_list)
 print(triangulate(q))
