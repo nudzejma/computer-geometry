@@ -60,6 +60,7 @@ def any_intersection(segments: List[Segment]) -> bool:
     labels_deque = deque()
     current = 0
     for i, point in enumerate(list_of_points):
+        # l = list_of_points[i].label
         if point.is_left:
             labels_deque.insert(current, point.label)
 
@@ -79,6 +80,7 @@ def any_intersection(segments: List[Segment]) -> bool:
                 continue
             current += 1
         else:
+            current = labels_deque.index(point.label)
             try:
                 if do_segments_intersects(dict_of_segments[labels_deque[current-1]], dict_of_segments[labels_deque[current+1]]):
                     print('any_intersection3: true')
@@ -102,7 +104,7 @@ def any_intersection(segments: List[Segment]) -> bool:
 # s2 = Segment(Point(x=-100, y=-50), Point(x=-80, y=45))
 # s2.draw(turtle, "red")
 # turtle.up()
-# s3 = Segment(Point(x=-100, y=-50), Point(x=-40, y=-95))
+# s3 = Segment(Point(x=-100, y=-50), Point(x=0, y=0))
 # s3.draw(turtle, "yellow")
 # turtle.up()
 # s4 = Segment(Point(x=-40, y=-95), Point(x=-80, y=45))
@@ -111,3 +113,10 @@ def any_intersection(segments: List[Segment]) -> bool:
 # print(any_intersection([s1, s2, s3, s4]))
 # turtle.done()
 
+# se = [Segment(Point(x=-100, y=-50), Point(x=-80, y=45)), Segment(Point(x=-100, y=-50), Point(x=-40, y=-95)), Segment(Point(x=-80, y=45), Point(x=-40, y=-95)),
+#       Segment(Point(x=0, y=0), Point(x=-80, y=45)), Segment(Point(x=0, y=0), Point(x=-40, y=-95)), Segment(Point(x=0, y=0), Point(x=30, y=100)),
+#       Segment(Point(x=-40, y=-95), Point(x=30, y=100))]
+# print(any_intersection(se))
+# for segments in se:
+#     segments.draw(turtle, "red")
+# turtle.done()

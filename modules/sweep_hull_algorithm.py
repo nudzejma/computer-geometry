@@ -192,14 +192,14 @@ input_list = [
 ]
 
 
-# se = sweep_hull(input_list)
-se = [Segment(Point(x=-100, y=-50), Point(x=-80, y=45)), Segment(Point(x=-100, y=-50), Point(x=-40, y=-95)), Segment(Point(x=-80, y=45), Point(x=-40, y=-95)),
-      Segment(Point(x=0, y=0), Point(x=-80, y=45)), Segment(Point(x=0, y=0), Point(x=-40, y=-95)), Segment(Point(x=0, y=0), Point(x=30, y=100)),
-      Segment(Point(x=-40, y=-95), Point(x=30, y=100))]
-print(any_intersection(se))
-for segments in se:
-    segments.draw(turtle, "red")
-turtle.done()
+se = sweep_hull(input_list)
+# se = [Segment(Point(x=-100, y=-50), Point(x=-80, y=45)), Segment(Point(x=-100, y=-50), Point(x=-40, y=-95)), Segment(Point(x=-80, y=45), Point(x=-40, y=-95)),
+#       Segment(Point(x=0, y=0), Point(x=-80, y=45)), Segment(Point(x=0, y=0), Point(x=-40, y=-95)), Segment(Point(x=0, y=0), Point(x=30, y=100)),
+#       Segment(Point(x=-40, y=-95), Point(x=30, y=100))]
+# print(any_intersection(se))
+# for segments in se:
+#     segments.draw(turtle, "red")
+# turtle.done()
 # p = Polygon(input_list)
 # p.draw(turtle, "red")
 # turtle.done()
