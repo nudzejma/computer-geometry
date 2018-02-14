@@ -14,7 +14,7 @@ from typing import List, Tuple, Deque
 import copy
 
 import itertools
-from anytree import Node, RenderTree, PreOrderIter, LevelOrderIter
+from anytree import Node, RenderTree, LevelOrderIter
 from anytree.exporter import DotExporter
 
 from modules.primitives import graham_scan
@@ -37,6 +37,8 @@ def triangulate_recursive(root_triangulation, current_n: int, end_n: int) -> Non
     Returns: None
 
     '''
+    if end_n == 3:
+        return
 
     pairs_list = root_triangulation.triangulation
     list_of_transform_pairs = []
@@ -66,7 +68,7 @@ def triangulate_recursive(root_triangulation, current_n: int, end_n: int) -> Non
 
             triangulate_recursive(new_child, current_n+1, end_n)
 
-def triangulate(convex_polygon: Polygon):
+def triangulate(convex_polygon: Polygon) -> List:
     '''
 
     This function finds triangulations of convex polygon
@@ -77,10 +79,10 @@ def triangulate(convex_polygon: Polygon):
 
     '''
     root_triangulation = Node('root', triangulation=[[1, 2], [1, 3], [2, 3]])
-    # fm = time()
+    fm = time()
     triangulate_recursive(root_triangulation, 3, len(convex_polygon.points))
-    # sm = time()
-    # print('{}s'.format(sm - fm))
+    sm = time()
+    print('{}s'.format(sm - fm))
     # print(RenderTree(root_triangulation))
 
     polygons_segments = []
@@ -141,14 +143,14 @@ input_list = [
     Point(x=0, y=-100),
     Point(x=80, y=-100),
     Point(x=140, y=-10),
-    # Point(x=160, y=40),
-    # Point(x=170, y=70),
-    # Point(x=160, y=100),
-    # Point(x=130, y=160),
-    # Point(x=110, y=190),
-    # Point(x=80, y=200),
-    # Point(x=0, y=200),
-    # Point(x=-110, y=190),
+    Point(x=160, y=40),
+    Point(x=170, y=70),
+    Point(x=160, y=100),
+    Point(x=130, y=160),
+    Point(x=110, y=190),
+    Point(x=80, y=200),
+    Point(x=0, y=200),
+    Point(x=-110, y=190),
     # Point(x=-130, y=160),
     # Point(x=-160, y=100)
 ]

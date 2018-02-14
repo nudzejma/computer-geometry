@@ -12,7 +12,8 @@ class Segment:
         self.first = first
         self.second = second
     def __eq__(self, other):
-        return (self.first == other.first) and (self.second == other.second)
+        return ((self.first == other.first) and (self.second == other.second)) \
+               or ((self.first == other.second) and (self.second == other.first))
     def draw(self,t, color):
         self.first.draw(t, color)
         self.second.draw(t, color, True)

@@ -365,6 +365,10 @@ def is_polygon_convex(polygon: Polygon) -> bool:
 # point_x_second = Point(randint(-200, 200),randint(-200,200))
 # point_y_second = Point(randint(-200, 200),randint(-200,200))
 #
+# point_x_first = Point(0, 0)
+# point_y_first = Point(0, 100)
+# point_x_second = Point(0, 100)
+# point_y_second = Point(100, 200)
 # s1 = Segment(point_x_first, point_y_first)
 # s1.draw(turtle, "green")
 # turtle.up()
@@ -377,7 +381,7 @@ def is_polygon_convex(polygon: Polygon) -> bool:
 #     turtle.write("Segments do intersect", font=("Arial", 16, "bold"))
 # else:
 #    turtle.write("Segments do not intersect", font=("Arial", 16, "italic"))
-
+# turtle.done()
 
 #Test for algorithm "ccw"
 # point_first = Point(randint(-200, 200),randint(-200,200))
