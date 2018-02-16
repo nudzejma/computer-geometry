@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="79056b5c-1091-4d78-8ce5-3acd8bdca987" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/primitives.py" afterPath="$PROJECT_DIR$/modules/primitives.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/sweep_hull_algorithm.py" afterPath="$PROJECT_DIR$/modules/sweep_hull_algorithm.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/sweep_line.py" afterPath="$PROJECT_DIR$/modules/sweep_line.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/structures/line_segment.py" afterPath="$PROJECT_DIR$/structures/line_segment.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,8 +17,8 @@
       <file leaf-file-name="sweep_hull_algorithm.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/modules/sweep_hull_algorithm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="259" column="23" lean-forward="true" selection-start-line="259" selection-start-column="23" selection-end-line="259" selection-end-column="23" />
+            <state relative-caret-position="287">
+              <caret line="315" column="0" lean-forward="true" selection-start-line="315" selection-start-column="0" selection-end-line="315" selection-end-column="0" />
               <folding>
                 <element signature="e#81#94#0" expanded="true" />
               </folding>
@@ -62,7 +59,7 @@
       <file leaf-file-name="hurtado_noy_algorithm.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/hurtado_noy_algorithm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="1292">
               <caret line="92" column="38" lean-forward="false" selection-start-line="92" selection-start-column="38" selection-end-line="98" selection-end-column="0" />
               <folding />
             </state>
@@ -82,7 +79,7 @@
       <file leaf-file-name="sweep_line.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/sweep_line.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
+            <state relative-caret-position="85">
               <caret line="11" column="20" lean-forward="true" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
@@ -193,6 +190,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -219,8 +218,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -470,7 +467,14 @@
       <option name="project" value="LOCAL" />
       <updated>1518626063990</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="sweep hull finished - changes needed">
+      <created>1518745997225</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1518745997225</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -533,14 +537,15 @@
     <MESSAGE value="correction on database polygon model" />
     <MESSAGE value="Added sweep hull and sweep line algorithm" />
     <MESSAGE value="sweep line fixed bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="sweep line fixed bug" />
+    <MESSAGE value="sweep hull finished - changes needed" />
+    <option name="LAST_COMMIT_MESSAGE" value="sweep hull finished - changes needed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/modules/sweep_hull_algorithm.py</url>
-          <line>217</line>
+          <line>264</line>
           <option name="timeStamp" value="117" />
         </line-breakpoint>
       </breakpoints>
@@ -825,7 +830,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/modules/hurtado_noy_algorithm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
+        <state relative-caret-position="1292">
           <caret line="92" column="38" lean-forward="false" selection-start-line="92" selection-start-column="38" selection-end-line="98" selection-end-column="0" />
           <folding />
         </state>
@@ -843,13 +848,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="103">
           <caret line="308" column="0" lean-forward="false" selection-start-line="308" selection-start-column="0" selection-end-line="308" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modules/sweep_line.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
+        <state relative-caret-position="85">
           <caret line="11" column="20" lean-forward="true" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
@@ -859,8 +863,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/modules/sweep_hull_algorithm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="259" column="23" lean-forward="true" selection-start-line="259" selection-start-column="23" selection-end-line="259" selection-end-column="23" />
+        <state relative-caret-position="287">
+          <caret line="315" column="0" lean-forward="true" selection-start-line="315" selection-start-column="0" selection-end-line="315" selection-end-column="0" />
           <folding>
             <element signature="e#81#94#0" expanded="true" />
           </folding>

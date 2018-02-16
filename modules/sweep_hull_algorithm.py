@@ -90,12 +90,59 @@ def get_sum_of_angles_contrary_to_flipp_edge(flipp_edge: Segment, left_triangle:
     print(((b1 ** 2) + (c1 ** 2) - (base_edge ** 2)) / (2 * b1 * c1), ((b2 ** 2) + (c2 ** 2) - (base_edge ** 2)) / (2 * b2 * c2))
     left_angle = math.acos(((b1 ** 2) + (c1 ** 2) - (base_edge ** 2)) / (2 * b1 * c1))
     right_angle = math.acos(((b2 ** 2) + (c2 ** 2) - (base_edge ** 2)) / (2 * b2 * c2))
-    return left_angle + right_angle
 
-def flipp(flipp_edge: Segment, left_triangle: Triangle, right_triangle: Triangle):
-    return DelaunayTriangulationSegment(left_triangle.first, right_triangle.second,
-                                        Triangle(left_triangle.first, left_triangle.second, right_triangle.second),
-                                        Triangle(right_triangle.second, right_triangle.third, left_triangle.first))
+    print('left right angle', math.degrees(left_angle), math.degrees(right_angle))
+    return math.degrees(left_angle) + math.degrees(right_angle)
+
+
+def update_triangles(seg, new_left_triangle, new_right_triangle):
+    seg.left_triangle = new_left_triangle
+    seg.right_triangle = new_right_triangle
+
+
+def flipp(flipp_edge: Segment, left_triangle: Triangle, right_triangle: Triangle, hull: List):
+    print()
+    hull.remove(flipp_edge)
+    # new_left_triangle = Triangle(right_triangle.second, right_triangle.third, left_triangle.first)
+    # new_right_triangle = Triangle(left_triangle.first, left_triangle.second, right_triangle.second)
+
+    new_right_triangle = Triangle(right_triangle.second, right_triangle.third, left_triangle.first)
+    new_left_triangle = Triangle(left_triangle.first, left_triangle.second, right_triangle.second)
+
+    hull.append(DelaunayTriangulationSegment(left_triangle.first, right_triangle.second,
+                                        new_left_triangle, new_right_triangle))
+    print(left_triangle.first, left_triangle.second, right_triangle.first, right_triangle.second)
+    print(new_left_triangle.first, new_left_triangle.second, new_right_triangle.first, new_right_triangle.second)
+    seg_1 = hull[hull.index(
+        DelaunayTriangulationSegment(left_triangle.first, left_triangle.second))]
+    seg_1.second_triangle = new_right_triangle
+
+    seg_2 = hull[hull.index(
+        DelaunayTriangulationSegment(left_triangle.first, left_triangle.third))]
+    seg_2.second_triangle = new_left_triangle
+
+    seg_3 = hull[hull.index(
+        DelaunayTriangulationSegment(right_triangle.first, right_triangle.second))]
+    seg_3.first_triangle = new_right_triangle
+
+    seg_4 = hull[hull.index(
+        DelaunayTriangulationSegment(right_triangle.second, right_triangle.third))]
+    seg_4.first_triangle = new_left_triangle
+
+    if get_sum_of_angles_contrary_to_flipp_edge(seg_1, seg_1.first_triangle,
+                                                seg_1.second_triangle) > 180:
+        flipp(seg_1, seg_1.first_triangle, seg_1.second_triangle, hull)
+    if get_sum_of_angles_contrary_to_flipp_edge(seg_2, seg_2.first_triangle,
+                                                seg_2.second_triangle) > 180:
+        flipp(seg_2, seg_2.first_triangle, seg_2.second_triangle, hull)
+
+    if seg_3.first_triangle != None and seg_3.second_triangle != None and get_sum_of_angles_contrary_to_flipp_edge(seg_3, seg_3.first_triangle,
+                                                seg_3.second_triangle) > 180:
+        flipp(seg_3, seg_3.first_triangle, seg_3.second_triangle, hull)
+    if seg_4.first_triangle != None and seg_4.second_triangle != None and get_sum_of_angles_contrary_to_flipp_edge(seg_4, seg_4.first_triangle,
+                                                seg_4.second_triangle) > 180:
+        flipp(seg_2, seg_4.first_triangle, seg_4.second_triangle, hull)
+
 
 def sweep_hull(input_list: List[Point]):
     '''
@@ -215,10 +262,9 @@ def sweep_hull(input_list: List[Point]):
         while len(flipp_edges) > 0:
             # print('len', len(flipp_edges)-1)
             # convex_hull_segments.remove(flipp_edges[len(flipp_edges)-1])
-            if get_sum_of_angles_contrary_to_flipp_edge(flipp_edge, flipp_edge.first_triangle, flipp_edge.second_triangle) < 180:
-                new_seg = flipp(flipp_edge, flipp_edge.first_triangle, flipp_edge.second_triangle)
-                convex_hull_segments.remove(flipp_edge)
-                convex_hull_segments.append(new_seg)
+            if get_sum_of_angles_contrary_to_flipp_edge(flipp_edge, flipp_edge.first_triangle, flipp_edge.second_triangle) > 180:
+                flipp(flipp_edge, flipp_edge.first_triangle, flipp_edge.second_triangle, convex_hull_segments)
+
                 print('flippat')
             flipp_edges.pop()
 
@@ -259,11 +305,11 @@ input_list = [
     Point(x=-40, y=-95),
     Point(x=30, y=100),
     Point(x=0, y=0),
-    # Point(x=-10, y=0),
+    Point(x=-50, y=-80),
     Point(x=100, y=0),
-    # Point(x=90, y=-100),
+    Point(x=90, y=-100),
     Point(x=100, y=50),
-    # Point(x=140, y=-30),
+    Point(x=140, y=-30),
     Point(x=-140, y=-130)
 ]
 
