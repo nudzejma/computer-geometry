@@ -30,67 +30,200 @@ class LabeledSegmentPoint():
         self.label = label
         self.is_left = is_left
 
+    def print_data(self):
+        print(self.label, self.x, self.y)
+
 
 def _get_x_coordinate(point: LabeledSegmentPoint) -> Tuple:
 
-    return point.x, -point.y
+    # if point.is_left:
+    #     if point.belong_segment.first.x == point.x:
+    #         return point.x, -point.y, point.belong_segment.second.x
+    #     elif point.belong_segment.second.x == point.x:
+    #         return point.x, -point.y, point.belong_segment.first.x
+    # else:
+    #     if point.belong_segment.first.x == point.x:
+    #         return point.x, -point.y, point.belong_segment.second.x
+    #     elif point.belong_segment.second.x == point.x:
+    #         return point.x, -point.y, point.belong_segment.first.x
 
+    if point.belong_segment.first.x == point.x:
+
+        return point.x, -point.y, point.belong_segment.second.x
+
+    elif point.belong_segment.second.x == point.x:
+
+        return point.x, -point.y, point.belong_segment.first.x
 
 def any_intersection(segments: List[Segment]) -> bool:
-    '''
+        '''
 
-    Args:
-        segments:
+        Args:
+            segments:
 
-    Returns:
+        Returns:
 
-    '''
+        '''
 
-    list_of_points = []
-    dict_of_segments = {}
-    for i, segment in enumerate(segments):
-        list_of_points.append(
-            LabeledSegmentPoint(segment.first.x, segment.first.y, segment, 'A' + str(i), segment.first.x <= segment.second.x))
-        list_of_points.append(
-            LabeledSegmentPoint(segment.second.x, segment.second.y, segment, 'A' + str(i), segment.first.x > segment.second.x))
-        dict_of_segments['A' + str(i)] = segment
+        list_of_points = []
+        dict_of_segments = {}
+        for i, segment in enumerate(segments):
 
-    list_of_points = sorted(list_of_points, key=_get_x_coordinate)
+            list_of_points.append(
+                LabeledSegmentPoint(segment.first.x, segment.first.y, segment, 'A' + str(i), segment.first.x <= segment.second.x))
+            list_of_points.append(
+                LabeledSegmentPoint(segment.second.x, segment.second.y, segment, 'A' + str(i), segment.first.x > segment.second.x))
+            dict_of_segments['A' + str(i)] = segment
 
-    labels_deque = deque()
-    current = 0
-    for i, point in enumerate(list_of_points):
-        # l = list_of_points[i].label
-        if point.is_left:
-            labels_deque.insert(current, point.label)
+        def _get_coordinates(label: str):
 
-            try:
-                if do_segments_intersects(dict_of_segments[point.label], dict_of_segments[labels_deque[current+1]]):
-                    # dict_of_segments[point.label].draw(turtle, "pink")
-                    # turtle.up()
-                    # dict_of_segments[labels_deque[current + 1]].draw(turtle, "pink")
-                    # turtle.up()
-                    print('any_intersection1: true', dict_of_segments[point.label].first, dict_of_segments[point.label].second, dict_of_segments[labels_deque[current+1]].first, dict_of_segments[labels_deque[current+1]].second)
-                    return True
+            seg_points = [point for point in list_of_points if point.label == label]
+            if seg_points[0].is_left:
+                return seg_points[0].y, seg_points[1].y
+            else:
+                return seg_points[1].y, seg_points[0].y
 
-                if do_segments_intersects(dict_of_segments[point.label], dict_of_segments[labels_deque[current-1]]):
-                    print('any_intersection2: true')
-                    return True
-            except IndexError:
-                continue
-            current += 1
-        else:
-            current = labels_deque.index(point.label)
-            try:
-                if do_segments_intersects(dict_of_segments[labels_deque[current-1]], dict_of_segments[labels_deque[current+1]]):
-                    print('any_intersection3: true')
-                    return True
-                labels_deque.remove(point.label)
+        list_of_points = sorted(list_of_points, key=_get_x_coordinate)
+        # for p in list_of_points:
+        #     p.print_data()
 
-            except IndexError:
-                continue
-    print('any_intersection4: false')
-    return False
+        labels_deque = deque()
+        current = 0
+        for i, point in enumerate(list_of_points):
+            # l = list_of_points[i].label
+            if point.is_left:
+                labels_deque.append(point.label)
+                labels_deque = sorted(labels_deque, key=_get_coordinates)
+                # print('labels: ', end=' ')
+                # for l in labels_deque:
+                #     print (l, end=' ')
+                # print()
+                current = labels_deque.index(point.label)
+                try:
+                    successor = labels_deque[current+1]
+
+                    # print('label and successor: ', point.label, successor, end='\n')
+                    if do_segments_intersects(dict_of_segments[point.label], dict_of_segments[successor]):
+                        # dict_of_segments[point.label].draw(turtle, "pink")
+                        # turtle.up()
+                        # dict_of_segments[labels_deque[current + 1]].draw(turtle, "pink")
+                        # turtle.up()
+                        print('any_intersection1: true', dict_of_segments[point.label].first, dict_of_segments[point.label].second, dict_of_segments[labels_deque[current+1]].first, dict_of_segments[labels_deque[current+1]].second)
+                        # print("labels: ")
+                        # for l in labels_deque:
+                        #     print(l, dict_of_segments[l].first,dict_of_segments[l].second)
+                        return True
+                    else:
+                        try:
+                            predecessor = labels_deque[current - 1]
+                            # print('label and predecessor: ', point.label, predecessor, end='\n')
+                            if do_segments_intersects(dict_of_segments[point.label], dict_of_segments[predecessor]):
+                                # print("labels: ")
+                                # for l in labels_deque:
+                                #     print(l, dict_of_segments[l].first,dict_of_segments[l].second)
+                                print('any_intersection2: true')
+                                return True
+                        except IndexError:
+                            continue
+
+                except IndexError:
+                    try:
+                        predecessor = labels_deque[current-1]
+                        # print('label and predecessor: ', point.label, predecessor, end='\n')
+                        if do_segments_intersects(dict_of_segments[point.label], dict_of_segments[predecessor]):
+                            # print("labels: ")
+                            # for l in labels_deque:
+                            #     print(l, dict_of_segments[l].first,dict_of_segments[l].second)
+                            print('any_intersection2: true')
+                            return True
+                    except IndexError:
+                        continue
+                    continue
+
+            else:
+                current = labels_deque.index(point.label)
+                try:
+                    successor = labels_deque[current + 1]
+                    predecessor = labels_deque[current - 1]
+                    labels_deque.remove(point.label)
+                    if do_segments_intersects(dict_of_segments[successor], dict_of_segments[predecessor]):
+                        # print("labels: ")
+                        # for l in labels_deque:
+                        #     print(l, dict_of_segments[l].first,dict_of_segments[l].second)
+                        # print('any_intersection3: true')
+                        return True
+
+
+                except IndexError:
+                    labels_deque.remove(point.label)
+                    continue
+
+                    # print("labels: ")
+                    # for l in labels_deque:
+                    #     print(l, dict_of_segments[l].first,dict_of_segments[l].second)
+        print('any_intersection4: false')
+        return False
+
+
+    # def any_intersection(segments: List[Segment]) -> bool:
+#     '''
+#
+#     Args:
+#         segments:
+#
+#     Returns:
+#
+#     '''
+#
+#     list_of_points = []
+#     dict_of_segments = {}
+#     for i, segment in enumerate(segments):
+#         list_of_points.append(
+#             LabeledSegmentPoint(segment.first.x, segment.first.y, segment, 'A' + str(i), segment.first.x <= segment.second.x))
+#         list_of_points.append(
+#             LabeledSegmentPoint(segment.second.x, segment.second.y, segment, 'A' + str(i), segment.first.x > segment.second.x))
+#         dict_of_segments['A' + str(i)] = segment
+#
+#     list_of_points = sorted(list_of_points, key=_get_x_coordinate)
+#
+#     labels_deque = deque()
+#     current = 0
+#     for i, point in enumerate(list_of_points):
+#         # l = list_of_points[i].label
+#         if point.is_left:
+#             labels_deque.insert(current+1, point.label)
+#
+#             try:
+#                 if do_segments_intersects(dict_of_segments[point.label], dict_of_segments[labels_deque[current+1]]):
+#                     # dict_of_segments[point.label].draw(turtle, "pink")
+#                     # turtle.up()
+#                     # dict_of_segments[labels_deque[current + 1]].draw(turtle, "pink")
+#                     # turtle.up()
+#                     print('any_intersection1: true', dict_of_segments[point.label].first, dict_of_segments[point.label].second, dict_of_segments[labels_deque[current+1]].first, dict_of_segments[labels_deque[current+1]].second)
+#                     return True
+#
+#                 if do_segments_intersects(dict_of_segments[point.label], dict_of_segments[labels_deque[current-1]]):
+#                     print('any_intersection2: true')
+#                     return True
+#             except IndexError:
+#                 continue
+#             current += 1
+#         else:
+#             current = labels_deque.index(point.label)
+#             try:
+#                 if do_segments_intersects(dict_of_segments[labels_deque[current-1]], dict_of_segments[labels_deque[current+1]]):
+#                     print('any_intersection3: true')
+#                     return True
+#                 labels_deque.remove(point.label)
+#
+#             except IndexError:
+#                 continue
+#
+#         # print("labels: ")
+#         # for l in labels_deque:
+#         #     print(l, dict_of_segments[l].first,dict_of_segments[l].second)
+#     print('any_intersection4: false')
+#     return False
 
 
 # point_x_first = Point(0, 0)
@@ -112,10 +245,12 @@ def any_intersection(segments: List[Segment]) -> bool:
 # turtle.up()
 # print(any_intersection([s1, s2, s3, s4]))
 # turtle.done()
-
+#
 # se = [Segment(Point(x=-100, y=-50), Point(x=-80, y=45)), Segment(Point(x=-100, y=-50), Point(x=-40, y=-95)), Segment(Point(x=-80, y=45), Point(x=-40, y=-95)),
-#       Segment(Point(x=0, y=0), Point(x=-80, y=45)), Segment(Point(x=0, y=0), Point(x=-40, y=-95)), Segment(Point(x=0, y=0), Point(x=30, y=100)),
-#       Segment(Point(x=-40, y=-95), Point(x=30, y=100))]
+#       Segment(Point(x=0, y=0), Point(x=-80, y=45)), Segment(Point(x=0, y=0), Point(x=-40, y=-95)), Segment(Point(x=0, y=0), Point(x=30, y=100)), Segment( Point(x=-40, y=-95), Point(x=30, y=100))
+#       # Segment(Point(x=-80, y=45), Point(x=30, y=100)), Segment(Point(x=90, y=-100), Point(x=30, y=100)),
+#       # Segment(Point(x=90, y=-100), Point(x=0, y=0)), Segment(Point(x=90, y=-100), Point(x=-40, y=-95)), Segment(Point(x=100, y=50), Point(x=30, y=100)),
+#     ]
 # print(any_intersection(se))
 # for segments in se:
 #     segments.draw(turtle, "red")

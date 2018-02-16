@@ -286,7 +286,7 @@ def is_polygon_convex(polygon: Polygon) -> bool:
     :return: True if polygon is convex, False otherwise
     '''
     old_ccw = ccw(polygon.points[0], polygon.points[1], polygon.points[2])
-    for i in range(1, len(polygon.points)-1):
+    for i in range(1, len(polygon.points)):
         new_ccw = ccw(polygon.points[i%len(polygon.points)], polygon.points[(i+1)%len(polygon.points)], polygon.points[(i+2)%len(polygon.points)])
         if old_ccw != new_ccw:
             return False
@@ -521,7 +521,7 @@ def is_polygon_convex(polygon: Polygon) -> bool:
 # point_third = Point(randint(-200, 200),randint(-200,200))
 # point_fourth = Point(randint(-200, 200),randint(-200,200))
 #
-# q = Quadrilateral(point_first, point_second, point_third, point_fourth)
+# q = Quadrilateral(Point(x=-100, y=-50), Point(x=-40, y=-95), Point(x=-80, y=45), Point(x=-140, y=-130))
 # q.draw(turtle, "green")
 #
 # turtle.up()
@@ -531,7 +531,7 @@ def is_polygon_convex(polygon: Polygon) -> bool:
 #     turtle.write("Polygon is convex", font=("Arial", 16, "bold"))
 # else:
 #     turtle.write("Polygon is not convex", font=("Arial", 16, "bold"))
-
+#
 # turtle.done()
 
 

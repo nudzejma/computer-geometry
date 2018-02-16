@@ -19,7 +19,7 @@ class Segment:
         self.second.draw(t, color, True)
 
 # p1 = Point(0,0)
-# p2 = Point(100, -200)
+# p2 = Point(100, -200)1
 # line_segment = Segment(p1, p2)
 # line_segment1 = Segment(p1, p2)
 # print(line_segment == line_segment1)

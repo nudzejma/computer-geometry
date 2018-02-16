@@ -3,8 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="79056b5c-1091-4d78-8ce5-3acd8bdca987" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/primitives.py" afterPath="$PROJECT_DIR$/modules/primitives.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/sweep_hull_algorithm.py" afterPath="$PROJECT_DIR$/modules/sweep_hull_algorithm.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/sweep_line.py" afterPath="$PROJECT_DIR$/modules/sweep_line.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/structures/line_segment.py" afterPath="$PROJECT_DIR$/structures/line_segment.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,8 +20,8 @@
       <file leaf-file-name="sweep_hull_algorithm.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/modules/sweep_hull_algorithm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="118" column="20" lean-forward="false" selection-start-line="118" selection-start-column="20" selection-end-line="118" selection-end-column="20" />
+            <state relative-caret-position="156">
+              <caret line="259" column="23" lean-forward="true" selection-start-line="259" selection-start-column="23" selection-end-line="259" selection-end-column="23" />
               <folding>
                 <element signature="e#81#94#0" expanded="true" />
               </folding>
@@ -27,11 +29,31 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="polygon.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/structures/polygon.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="14" column="28" lean-forward="false" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="triangle.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/structures/triangle.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="9" column="26" lean-forward="false" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="line_segment.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/structures/line_segment.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+            <state relative-caret-position="17">
+              <caret line="1" column="14" lean-forward="false" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -40,18 +62,8 @@
       <file leaf-file-name="hurtado_noy_algorithm.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/hurtado_noy_algorithm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1292">
+            <state relative-caret-position="17">
               <caret line="92" column="38" lean-forward="false" selection-start-line="92" selection-start-column="38" selection-end-line="98" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="primitives.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/primitives.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1343">
-              <caret line="91" column="28" lean-forward="false" selection-start-line="91" selection-start-column="28" selection-end-line="91" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -60,8 +72,8 @@
       <file leaf-file-name="point.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/structures/point.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="26" column="29" lean-forward="false" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
+            <state relative-caret-position="340">
+              <caret line="23" column="23" lean-forward="false" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -70,8 +82,8 @@
       <file leaf-file-name="sweep_line.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/sweep_line.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="2" selection-end-line="113" selection-end-column="15" />
+            <state relative-caret-position="187">
+              <caret line="11" column="20" lean-forward="true" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -153,10 +165,10 @@
         <option value="$PROJECT_DIR$/db/cast.py" />
         <option value="$PROJECT_DIR$/db/dal.py" />
         <option value="$PROJECT_DIR$/modules/hurtado_noy_algorithm.py" />
-        <option value="$PROJECT_DIR$/modules/primitives.py" />
         <option value="$PROJECT_DIR$/structures/line_segment.py" />
-        <option value="$PROJECT_DIR$/modules/sweep_hull_algorithm.py" />
         <option value="$PROJECT_DIR$/modules/sweep_line.py" />
+        <option value="$PROJECT_DIR$/modules/primitives.py" />
+        <option value="$PROJECT_DIR$/modules/sweep_hull_algorithm.py" />
       </list>
     </option>
   </component>
@@ -181,7 +193,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -209,6 +220,7 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -332,8 +344,8 @@
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.sweep_hull_algorithm" />
-        <item index="1" class="java.lang.String" itemvalue="Python.sweep_line" />
-        <item index="2" class="java.lang.String" itemvalue="Python.primitives" />
+        <item index="1" class="java.lang.String" itemvalue="Python.primitives" />
+        <item index="2" class="java.lang.String" itemvalue="Python.sweep_line" />
         <item index="3" class="java.lang.String" itemvalue="Python.hurtado_noy_algorithm" />
         <item index="4" class="java.lang.String" itemvalue="Python.dal" />
       </list>
@@ -451,22 +463,30 @@
       <option name="project" value="LOCAL" />
       <updated>1518605073126</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="sweep line fixed bug">
+      <created>1518626063990</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1518626063990</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14787701" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15959005" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2429022" sideWeight="0.50292826" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4274448" sideWeight="0.49707174" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35173503" sideWeight="0.49707174" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39905363" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13722397" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42902207" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329429" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -512,17 +532,27 @@
     <MESSAGE value="corrections" />
     <MESSAGE value="correction on database polygon model" />
     <MESSAGE value="Added sweep hull and sweep line algorithm" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added sweep hull and sweep line algorithm" />
+    <MESSAGE value="sweep line fixed bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="sweep line fixed bug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="99" />
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/modules/sweep_hull_algorithm.py</url>
+          <line>217</line>
+          <option name="timeStamp" value="117" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="118" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="new_pairs_list" />
         <watch expression="new_pairs_list" />
         <watch expression="new_pairs_list" />
+        <watch expression="convex_hull_segments[7]" />
+        <watch expression="segments[12]" />
       </configuration>
     </watches-manager>
   </component>
@@ -562,13 +592,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="9" column="37" lean-forward="true" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/structures/triangle.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="9" column="26" lean-forward="true" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -712,13 +735,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/structures/polygon.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="28" lean-forward="false" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://E:/python/Lib/site-packages/sqlalchemy/orm/mapper.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="185">
@@ -768,14 +784,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/structures/point.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="26" column="29" lean-forward="false" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://E:/python/Lib/typing.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="143">
@@ -783,9 +791,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/structures/triangle.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="9" column="26" lean-forward="false" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/structures/point.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="23" column="23" lean-forward="false" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/structures/line_segment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="14" lean-forward="false" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/structures/polygon.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="14" column="28" lean-forward="false" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/modules/hurtado_noy_algorithm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1292">
+        <state relative-caret-position="17">
           <caret line="92" column="38" lean-forward="false" selection-start-line="92" selection-start-column="38" selection-end-line="98" selection-end-column="0" />
           <folding />
         </state>
@@ -793,31 +833,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/modules/primitives.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1343">
-          <caret line="91" column="28" lean-forward="false" selection-start-line="91" selection-start-column="28" selection-end-line="91" selection-end-column="28" />
+        <state relative-caret-position="188">
+          <caret line="529" column="27" lean-forward="false" selection-start-line="523" selection-start-column="2" selection-end-line="534" selection-end-column="15" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://E:/python/Lib/codecs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="32">
+        <state relative-caret-position="103">
           <caret line="308" column="0" lean-forward="false" selection-start-line="308" selection-start-column="0" selection-end-line="308" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/structures/line_segment.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modules/sweep_line.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="2" selection-end-line="113" selection-end-column="15" />
+        <state relative-caret-position="187">
+          <caret line="11" column="20" lean-forward="true" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
@@ -826,8 +859,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/modules/sweep_hull_algorithm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="118" column="20" lean-forward="false" selection-start-line="118" selection-start-column="20" selection-end-line="118" selection-end-column="20" />
+        <state relative-caret-position="156">
+          <caret line="259" column="23" lean-forward="true" selection-start-line="259" selection-start-column="23" selection-end-line="259" selection-end-column="23" />
           <folding>
             <element signature="e#81#94#0" expanded="true" />
           </folding>

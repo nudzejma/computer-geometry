@@ -3,15 +3,15 @@ Finds Delaunay trianguations of set of points using sweep hull algorithm
 '''
 import turtle
 from bisect import bisect_left, bisect
-from typing import List
+from typing import List, Tuple
 
 # import numpy
 import math
 
 import numpy
 
-from modules.primitives import get_x_coordinate, euclidean_distance
-from modules.sweep_line import any_intersection
+from modules.primitives import get_x_coordinate, euclidean_distance, is_polygon_convex
+from modules.sweep_line import any_intersection, do_segments_intersects
 from structures.line_segment import Segment
 from structures.point import Point
 from structures.polygon import Polygon
@@ -19,7 +19,7 @@ from structures.triangle import Triangle
 
 class DelaunayTriangulationSegment(Segment):
 
-    def __init__(self,first_point: Point, second_point: Point, first_triangle = None, second_triangle = None):
+    def __init__(self,first_point: Point, second_point: Point, first_triangle=None, second_triangle=None):
         super(DelaunayTriangulationSegment, self).__init__(first_point, second_point)
         self.first_triangle = first_triangle
         self.second_triangle = second_triangle
@@ -54,6 +54,49 @@ def is_point_outside_of_circum_circle(a: Point, b: Point, c: Point, d: Point):
     return det < 0
 
 
+def get_edges(flipp_edge, left_trangle) -> List:
+    if flipp_edge.first == left_trangle.first:
+        if flipp_edge.second ==  left_trangle.second:
+            return [(left_trangle.first, left_trangle.third), (left_trangle.second, left_trangle.third)]
+        else:
+            return [(left_trangle.first, left_trangle.second), (left_trangle.second, left_trangle.third)]
+    elif flipp_edge.first == left_trangle.second :
+        if flipp_edge.second == left_trangle.first:
+            return [(left_trangle.first, left_trangle.third), (left_trangle.second, left_trangle.third)]
+        else:
+            return [(left_trangle.first, left_trangle.second), (left_trangle.first, left_trangle.third)]
+    else:
+        if flipp_edge.second == left_trangle.second:
+            return [(left_trangle.first, left_trangle.third), (left_trangle.second, left_trangle.first)]
+        else:
+            return [(left_trangle.first, left_trangle.second), (left_trangle.second, left_trangle.third)]
+
+
+
+
+def get_sum_of_angles_contrary_to_flipp_edge(flipp_edge: Segment, left_triangle: Triangle, right_triangle: Triangle) -> float:
+
+    base_edge = flipp_edge.first.euclidean_distance(flipp_edge.second)
+    left_triangle_edges = get_edges(flipp_edge, left_triangle)
+    b1 = left_triangle_edges[0][0].euclidean_distance(left_triangle_edges[0][1])
+    c1 = left_triangle_edges[1][0].euclidean_distance(left_triangle_edges[1][1])
+
+    right_triangle_edges = get_edges(flipp_edge, right_triangle)
+    b2 = right_triangle_edges[0][0].euclidean_distance(right_triangle_edges[0][1])
+    c2 = right_triangle_edges[1][0].euclidean_distance(right_triangle_edges[1][1])
+
+    print(base_edge, b1, c1, b2, c2)
+    print(b1 ** 2)
+    print(((b1 ** 2) + (c1 ** 2) - (base_edge ** 2)) / (2 * b1 * c1), ((b2 ** 2) + (c2 ** 2) - (base_edge ** 2)) / (2 * b2 * c2))
+    left_angle = math.acos(((b1 ** 2) + (c1 ** 2) - (base_edge ** 2)) / (2 * b1 * c1))
+    right_angle = math.acos(((b2 ** 2) + (c2 ** 2) - (base_edge ** 2)) / (2 * b2 * c2))
+    return left_angle + right_angle
+
+def flipp(flipp_edge: Segment, left_triangle: Triangle, right_triangle: Triangle):
+    return DelaunayTriangulationSegment(left_triangle.first, right_triangle.second,
+                                        Triangle(left_triangle.first, left_triangle.second, right_triangle.second),
+                                        Triangle(right_triangle.second, right_triangle.third, left_triangle.first))
+
 def sweep_hull(input_list: List[Point]):
     '''
 
@@ -74,16 +117,16 @@ def sweep_hull(input_list: List[Point]):
         '''
         # distance = euclidean_distance(left_point, point)
         distance = (point.x - left_point.x) ** 2
-        print('distance from', left_point.x,'to: ', point.x , ': ', distance)
+        # print('distance from', left_point.x,'to: ', point.x , ': ', distance)
         return distance
 
     input_list = sorted(input_list, key=_get_euclidean_distance)
     segments_to_flipp = []
     convex_hull_segments = [
                             DelaunayTriangulationSegment(input_list[0], input_list[1],
-                                                         Triangle(input_list[0], input_list[1], input_list[2])),
+                                                         Triangle(input_list[2], input_list[1], input_list[0])),
                             DelaunayTriangulationSegment(input_list[0], input_list[2],
-                                                        Triangle(input_list[0], input_list[1], input_list[2])),
+                                                        Triangle(input_list[2], input_list[0], input_list[1])),
                             DelaunayTriangulationSegment(input_list[1], input_list[2],
                                                          Triangle(input_list[0], input_list[1], input_list[2]))
                             ]
@@ -93,49 +136,57 @@ def sweep_hull(input_list: List[Point]):
 
         # print(i)
         new_triangle_segments = []
+        flipp_edges = []
         # convex_hull_segments_ = convex_hull_segments[:]
         for point in input_list[(i + 3 - 1)::-1]:
 
             new_segment = DelaunayTriangulationSegment(inspected_point, point)
+
             convex_hull_segments.append(new_segment)
             print(i, inspected_point, point)
 
-            # for segments in convex_hull_segments:
-            #     segments.draw(turtle, "red")
-            # turtle.done()
-
             if not any_intersection(convex_hull_segments):
                 convex_hull_segments.pop()
-                print('tu sam')
                 if len(new_triangle_segments) == 0:
                     new_triangle_segments.append(new_segment)
-                    print(" i apendam")
+                    # convex_hull_segments.append(new_segment)
+                    # print(" i apendam")
                 else:
 
                     seg = new_triangle_segments.pop()
-                    print('ne apendam, ali imam', seg.first, seg.second)
+                    # print('ne apendam, ali imam', seg.first, seg.second)
                     # provjerit da li postoji uopste ovaj segement
 
                     segment_from_convex_hull = convex_hull_segments[convex_hull_segments.index(DelaunayTriangulationSegment(point, seg.second))]
 
                     triang = Triangle(point, inspected_point, seg.second)
-
                     if new_segment.first_triangle == None:
                         new_segment.add_first_triangle(triang)
                     else:
                         new_segment.add_second_triangle(triang)
 
+
                     if segment_from_convex_hull.first_triangle == None:
                         segment_from_convex_hull.add_first_triangle(triang)
                     else:
                         segment_from_convex_hull.add_second_triangle(triang)
+                        inspect_polygon = Polygon([segment_from_convex_hull.second_triangle.first,
+                                                   segment_from_convex_hull.second_triangle.second,
+                                                   segment_from_convex_hull.second_triangle.third,
+                                                   segment_from_convex_hull.first_triangle.first])
+                        # if point == Point(0, 0) and inspected_point == Point(-40, -95):
+                        #     inspect_polygon.draw(turtle, 'blue')
+                            # turtle.done()
+                        if is_polygon_convex(inspect_polygon):
+                            print('usaaaappp', inspect_polygon.points[0], inspect_polygon.points[1], inspect_polygon.points[2], inspect_polygon.points[3])
+                            flipp_edges.append(segment_from_convex_hull)
 
                     if seg.first_triangle == None:
                         seg.add_first_triangle(triang)
                     else:
                         seg.add_second_triangle(triang)
 
-                    if seg.second.y < new_segment.second.y:
+                    if seg.second.y > new_segment.second.y:
                         convex_hull_segments.append(seg)
                         new_triangle_segments.append(new_segment)
                     else:
@@ -143,25 +194,47 @@ def sweep_hull(input_list: List[Point]):
                         new_triangle_segments.append(seg)
 
             else:
-                print('else')
-                # for segments in convex_hull_segments:
-                #     segments.draw(turtle, "red")
-                # turtle.done()
+                # print('else')
+                # if inspected_point == Point(0, 0) and point == Point(-40, -95):
+                #     for segments in convex_hull_segments:
+                #         segments.draw(turtle, "red")
+                #     turtle.done()
                 convex_hull_segments.pop()
 
         if len(new_triangle_segments) != 0:
 
             convex_hull_segments.append(new_triangle_segments.pop())
 
+        print('flipp edges:', end=' ')
+
+        for flipp_edge in flipp_edges:
+            print(flipp_edge.first, flipp_edge.second, end='\n')
+            # if get_sum_of_angles_contrary_to_flipp_edge(flipp_edge, flipp_edge.first_triangle, flipp_edge.second_triangle) < 180:
+            #     print('flippat')
+
+        while len(flipp_edges) > 0:
+            # print('len', len(flipp_edges)-1)
+            # convex_hull_segments.remove(flipp_edges[len(flipp_edges)-1])
+            if get_sum_of_angles_contrary_to_flipp_edge(flipp_edge, flipp_edge.first_triangle, flipp_edge.second_triangle) < 180:
+                new_seg = flipp(flipp_edge, flipp_edge.first_triangle, flipp_edge.second_triangle)
+                convex_hull_segments.remove(flipp_edge)
+                convex_hull_segments.append(new_seg)
+                print('flippat')
+            flipp_edges.pop()
+
+    for segment in convex_hull_segments:
+        # print(segment.first, segment.second)
+        segment.draw(turtle, "red")
+    turtle.done()
 
 
 
-    print(input_list)
-    print(len(convex_hull_segments), convex_hull_segments[len(convex_hull_segments)-1].first, convex_hull_segments[len(convex_hull_segments)-1].second)
+    # print(input_list)
+    # print(len(convex_hull_segments), convex_hull_segments[len(convex_hull_segments)-1].first, convex_hull_segments[len(convex_hull_segments)-1].second)
     return convex_hull_segments
 
 # input_list = [
-#     Point(x=-170, y=70),
+    # Point(x=-170, y=70),
     # Point(x=-160, y=40),
     # Point(x=-130, y=-20),
     # Point(x=-110, y=-50),
@@ -186,9 +259,12 @@ input_list = [
     Point(x=-40, y=-95),
     Point(x=30, y=100),
     Point(x=0, y=0),
-    Point(x=90, y=-100),
+    # Point(x=-10, y=0),
+    Point(x=100, y=0),
+    # Point(x=90, y=-100),
     Point(x=100, y=50),
-    Point(x=140, y=-30)
+    # Point(x=140, y=-30),
+    Point(x=-140, y=-130)
 ]
 
 
